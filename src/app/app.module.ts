@@ -4,14 +4,18 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { ManageTasksComponent } from './manage-tasks/manage-tasks.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TasksComponent
+    TasksComponent,
+    ManageTasksComponent
   ],
   imports: [
     BrowserModule,
+    DragDropModule,
     AppRoutingModule,
     AngularFontAwesomeModule
   ],

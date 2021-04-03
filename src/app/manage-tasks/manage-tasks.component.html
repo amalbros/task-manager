@@ -1,0 +1,77 @@
+<form class="example"  style="margin-top:2%;margin-left:40%;">
+  <input type="text" placeholder="Search.." name="search">
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+<div style="margin-left:25%;margin-top:3%;">
+<div style="width:400px;margin-top:20px;float:left">
+  <select>
+    <option value="0">Date</option>
+    <option value="1">Today</option>
+    <option value="2">Tomorrow</option>
+    <option value="3">Select</option>
+  </select>
+</div>
+<button type="submit" style="margin-left:30%;background: #4527A0;border:1px solid #4527A0;border-radius:2px;color:white;padding:10px 20px 10px 20px">Create Task</button>
+</div>
+<div style="margin-left: 22%;margin-top:3%;" cdkDropListGroup>
+ 
+  <div class="example-container" style="float:left">
+    <h2>Low</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="todo"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of todo" cdkDrag>
+        <div class="card border-warning mb-3" style="width:100%;height:100%;">
+          <div class="card-header"><h3>{{item}}</h3></div>
+          <div class="card-body text-secondary">
+            <h5 class="card-title">Due :December 22,2018</h5>
+            <p class="card-text">Amal Roy</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example-container" >
+    <h2>Medium</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="done"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of done" cdkDrag>
+        <div class="card border-success mb-3" style="width:100%;height:100%;">
+          <div class="card-header"><h3>{{item}}</h3></div>
+          <div class="card-body text-secondary">
+            <h5 class="card-title">Due :December 22,2018</h5>
+            <p class="card-text">Amal Roy</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="example-container" >
+    <h2>High</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="done"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of done" cdkDrag>
+        <div class="card border-danger mb-3" style="width:100%;height:100%;">
+          <div class="card-header"><h3>{{item}}</h3></div>
+          <div class="card-body text-secondary">
+            <h5 class="card-title">Due :December 22,2018</h5>
+            <p class="card-text">Amal Roy</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
