@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { ManageTasksComponent } from './manage-tasks/manage-tasks.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { ContactsComponent } from './contacts/contacts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TasksComponent,
-    ManageTasksComponent
+    ManageTasksComponent,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,
