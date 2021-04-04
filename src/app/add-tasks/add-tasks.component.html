@@ -1,0 +1,134 @@
+
+ 
+<div class="container" style="margin-left:30%;">
+   
+    <button type="submit" style="margin-left:30%;background: #4527A0;border:1px solid #4527A0;border-radius:2px;color:white;padding:10px 20px 10px 20px"  (click) = "show()">Create Task</button>
+
+     </div> 
+ <div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Create Task</h4>
+
+      </div>
+      <div class="modal-body">
+                <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+                      <div class="row">
+                         <div class="col-sm-6">
+                            <div class="form-group">
+                                  <label>Task</label>
+                                  <input type="text" formControlName="task" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.task.errors }" />
+                                  <div *ngIf="submitted && f.task.errors" class="invalid-feedback">
+                                        <div *ngIf="f.task.errors.required">Task is required</div>
+                                  </div>
+                               </div>
+                         </div> 
+                         <div class="col-sm-6">
+                            <div class="form-group">
+                               <label>Associated With</label>
+                               <!-- <input type="text" formControlName="associatedWith"class="form-control" [ngClass]="{ 'is-invalid': submitted && f.associatedWith.errors }"  /> -->
+                               <select  formControlName="associatedWith"class="form-control" [ngClass]="{ 'is-invalid': submitted && f.associatedWith.errors }"  >
+                                 <option *ngFor="let associatedWith of users" [ngValue]="associatedWith">
+                                    {{ associatedWith.name }}
+                                 </option>
+                              </select>
+                               <div *ngIf="submitted && f.associatedWith.errors" class="invalid-feedback">
+                                  <div *ngIf="f.associatedWith.errors.required">Associated With is required</div>
+                               </div>
+                            </div>
+                         </div>
+                        
+                         <div class="col-sm-6">
+                            <div class="form-group">
+                               <label>Due Date</label>
+                             <input type="date" formControlName="dueDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" />
+            
+   
+                               <div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
+                                  <div *ngIf="f.dueDate.errors.required">Due Date is required</div>
+            
+                               </div>
+                            </div>
+                         </div>
+                         <div class="col-sm-6">
+                           <div class="form-group">
+                              <label>Due Time</label>
+                        <br>
+                            <input type="time"formControlName="dueTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dueTime.errors }"  >
+  
+                              <div *ngIf="submitted && f.dueTime.errors" class="invalid-feedback">
+                                 <div *ngIf="f.dueTime.errors.required">Due Time is required</div>
+           
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-sm-6">
+                           <div class="form-group">
+                              <label>Priority</label>
+                              <!-- <input type="text" formControlName="priority" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.priority.errors }" /> -->
+                              <select  formControlName="priority"class="form-control" [ngClass]="{ 'is-invalid': submitted && f.priority.errors }"  >
+                                 <option *ngFor="let priority of priorities" [ngValue]="priority">
+                                    {{ priority }}
+                                 </option>
+                              </select>
+                              <div *ngIf="submitted && f.priority.errors" class="invalid-feedback">
+                                 <div *ngIf="f.priority.errors">Priority is required</div>
+                                
+                              </div>
+                           </div>
+                        </div>
+             </div>
+             
+             <button type="submit" style="background: #4527A0;border:1px solid #4527A0;border-radius:2px;color:white;padding:10px 20px 10px 20px">Create</button>
+            </form>
+     
+    
+ </div>
+      <div class="modal-footer">
+          <button type="button" style="background: #292725;border:1px solid #4527A0;border-radius:2px;color:white;padding:10px 20px 10px 20px" data-dismiss="modal" (click) = "hide()">Close</button>
+      
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+
+  <!-- <div class="example-form">
+
+   <h3 class="heading"> Add Task</h3>
+
+ <form [formGroup] = "addTaskForm">
+ <mat-form-field class="example-full-width">
+   <mat-label>Title</mat-label>
+   <input matInput formControlName = "title">
+ </mat-form-field>
+
+ <mat-form-field class="example-full-width">
+   <mat-label>Description</mat-label>
+   <textarea rows="3" matInput formControlName  = "description"></textarea>
+ </mat-form-field>
+
+
+
+
+
+ <mat-form-field class="example-full-width" appearance="fill">
+   <mat-label>Task Date</mat-label>
+   <input matInput [matDatepicker]="picker" formControlName = "date">
+   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+   <mat-datepicker #picker></mat-datepicker>
+ </mat-form-field>
+
+ <div class="btn">
+   <button mat-raised-button mat-dialog-close color="primary"> Cancel </button>
+   <button  mat-raised-button color="primary">
+     Save
+   </button>
+ </div>
+
+</form>
+
+</div>
+ -->

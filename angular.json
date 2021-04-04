@@ -24,6 +24,7 @@
             ],
             "styles": [
               "src/styles.css",
+              "node_modules/ngx-datetime-picker/ngx-datetime-picker.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": []
