@@ -69,7 +69,7 @@
                               <!-- <input type="text" formControlName="priority" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.priority.errors }" /> -->
                               <select  formControlName="priority"class="form-control" [ngClass]="{ 'is-invalid': submitted && f.priority.errors }"  >
                                  <option *ngFor="let priority of priorities" [ngValue]="priority">
-                                    {{ priority }}
+                                    {{priority==1?'Low':priority==2?'Medium':'High'}}
                                  </option>
                               </select>
                               <div *ngIf="submitted && f.priority.errors" class="invalid-feedback">

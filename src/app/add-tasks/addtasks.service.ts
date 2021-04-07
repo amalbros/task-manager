@@ -7,7 +7,11 @@ import {environment} from '../../environments/environment';
 const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Basic OTVkYmIwZjBhYzg5NzgzMDNlNjRlMGEzOGMxNDk2MDQ6',
+      'AuthToken': 'EzntRe0KVQJ1fvDm9GTrr6fApHUfrDIZ'
+    })
+  };
+  const httpOptions2 = {
+    headers: new HttpHeaders({
       'AuthToken': 'EzntRe0KVQJ1fvDm9GTrr6fApHUfrDIZ'
     })
   };
@@ -24,7 +28,7 @@ export class AddtasksService {
     return this.http.get(this.url+"/listusers",httpOptions)
   }
   createTask(task){
-    return this.http.post(this.url+"/create",task,httpOptions)
+    return this.http.post(this.url+"/create",task,httpOptions2)
   }
   deleteTask(taskid){
     return this.http.post(this.url+"/delete",taskid,httpOptions)

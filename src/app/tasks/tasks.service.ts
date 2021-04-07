@@ -11,6 +11,11 @@ const httpOptions = {
       'AuthToken': 'EzntRe0KVQJ1fvDm9GTrr6fApHUfrDIZ'
     })
   };
+  const httpOptions2 = {
+    headers: new HttpHeaders({
+      'AuthToken': 'EzntRe0KVQJ1fvDm9GTrr6fApHUfrDIZ'
+    })
+  };
 @Injectable({
   providedIn: 'root'
 })
@@ -24,12 +29,12 @@ export class TasksService {
     return this.http.get(this.url+"/listusers",httpOptions)
   }
   createTask(task){
-    return this.http.post(this.url+"/create",task,httpOptions)
+    return this.http.post(this.url+"/create",task,httpOptions2)
   }
-  deleteTask(taskid){
-    return this.http.post(this.url+"/delete",taskid,httpOptions)
+  deleteTask(task){
+    return this.http.post(this.url+"/delete",task,httpOptions2)
   }
   updateTask(task){
-    return this.http.post(this.url+"/update",task,httpOptions)
+    return this.http.post(this.url+"/update",task,httpOptions2)
   }
 }

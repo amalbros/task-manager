@@ -9,7 +9,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { ContactsComponent } from './contacts/contacts.component';
 import {  HttpClientModule } from '@angular/common/http';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateTimePickerModule } from 'ngx-datetime-picker';
 import { NgxMatDatetimePickerModule , NgxMatNativeDateModule, NgxMatTimepickerModule} from 'ngx-mat-datetime-picker';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,18 +19,21 @@ import { MAT_DATE_LOCALE, DateAdapter } from '@angular/material';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import {MatNativeDateModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { taskPipe } from './task.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     TasksComponent,
     ManageTasksComponent,
     ContactsComponent,
-    AddTasksComponent
+    AddTasksComponent,
+    taskPipe
   ],
   imports: [
     NgxMatNativeDateModule,
     MatMomentDateModule,
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     NgxMatDatetimePickerModule,
   NgxMatTimepickerModule,

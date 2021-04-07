@@ -18,7 +18,7 @@ users;
 // public dateControl = new FormControl(new Date());
 public disabled = false;
 public showSpinners = true;
-priorities=["Low","Medium","High"]
+priorities=[1,2,3]
 // addTaskForm = new FormGroup({
 //   task: new FormControl(null, [Validators.required]),
 //   associatedWith: new FormControl(null, [Validators.required]),
@@ -65,21 +65,36 @@ get f() { return this.taskForm.controls; }
 onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
-    let taskObj={
+    var taskObj={
       "message":this.taskForm.controls.task.value,
-      "due_date":this.taskForm.controls.dueDate.value+" "+this.taskForm.controls.dueTime.value,
+      "due_date":this.taskForm.controls.dueDate.value+" "+this.taskForm.controls.dueTime.value+":00",
       "priority":this.taskForm.controls.priority.value,
       "assigned_to":this.taskForm.controls.associatedWith.value.id
     }
+    var form_data = new FormData();
+
+for ( var key in taskObj ) {
+
+    form_data.append(key, taskObj[key]);
+    console.log("Key:",key)
+    console.log("value:",taskObj[key])
+    console.log("Form Data:",form_data)
+}
+for(var pair of form_data.entries()){
+  console.log(pair[0]+","+pair[1])
+}
+
     console.log('Task Object:',taskObj)
     if (this.taskForm.invalid) {
         return;
     }
     if(this.submitted)
     {
-      // this.addTasksService.createTask(taskObj).subscribe(data=>{
-      //   console.log("Create Task Response:",data)
-      // })
+      this.addTasksService.createTask(form_data).subscribe(data=>{
+        console.log("Create Task Response:",data)
+      })
+      console.log("Form Data:",form_data)
+     
       this.showModal = false;
     } 
   
