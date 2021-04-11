@@ -64,11 +64,9 @@
         <td *ngIf="task.priority==1 " style="color:white;background-color: green;">Low</td>
         <td *ngIf="task.priority==2" style="color:white;background-color: yellow;">Medium</td>
         <td *ngIf="task.priority==3 " style="color:white;background-color: red;">High</td>
-        <!-- <td>{{task.priority==1?'Low':task.priority==2?'Medium':'High'}}</td> -->
+        
         <td>{{task.message}} &nbsp; &nbsp;
-          <app-edit-tasks [task]=task [taskIndex]=i (editTask)="editEvent($event)" ></app-edit-tasks>
-          <!-- <a (click)="editTask(i)"> <i class="fa fa-edit" ></i></a> -->
-          
+          <app-edit-tasks [task]=task [taskIndex]=i (editTask)="editEvent($event)" ></app-edit-tasks>          
           &nbsp;&nbsp;&nbsp;&nbsp;<a (click)="deleteTask(i)"><i class="fas fa-trash-alt"></i></a>
         </td>
         <td> <img src={{useridToImg[task.assigned_to]}} width="50" height="50">&nbsp;&nbsp;{{task.assigned_name}}</td>
