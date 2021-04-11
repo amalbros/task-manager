@@ -98,7 +98,6 @@ onSubmit() {
     this.submitted = true;
     console.log('Date:')
    console.log(this.taskForm.controls.dueDate.value)
-this.dateCheck(this.taskForm.controls.dueDate.value)
     // stop here if form is invalid
     var taskObj={
       "message":this.taskForm.controls.task.value,
