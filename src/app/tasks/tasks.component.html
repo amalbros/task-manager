@@ -2,21 +2,19 @@
 <ngx-spinner></ngx-spinner>
 <div class="container" >
   <div class="row" >
-    <div class="col-md-6">
+    <div class="col-sm-6">
     </div>
-    <div class="col-md-6" style='margin-top:3%'>
+    <div class="col-sm-6" style='margin-top:3%'>
  <input type="text"  [(ngModel)]="searchText" (ngModelChange)="search()"
        placeholder="Search tasks  ... " />
       
        </div>
-       <!-- <div class="col-md-2">
-       </div> -->
+      
   </div>
     <div class="row" style="margin-top:6%;" >
       <div class="col-sm-2 col-sm-hide"></div>
       <div class="col-sm-2">
         Priority:
-        <!-- <form [formGroup]="priorityFilterForm" (ngModelChange)="filterBy('Priority')" > -->
         <select [(ngModel)]="selectedPriority" (ngModelChange)="filterBy('priority')">
           <option *ngFor="let priority of priorities" [value]='priority'>{{priority[0]}}</option>
         </select>
@@ -29,7 +27,7 @@
         
         <div class="col-sm-3">
           Due :
-          <!-- {{dateString}} -->
+    
          <input type="date" [(ngModel)]="dueDateString" (ngModelChange)="filterBy('dueDate')">
       </div>
       <div class="col-sm-2" >
