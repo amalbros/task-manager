@@ -59,7 +59,8 @@ colors={'Low':"green",'Medium':'yellow','High':'red'}
     }
     let taskObj:any;
     taskObj=event.container.data[event.currentIndex]
-    taskObj['priority']=(Number(event.container.id[event.container.id.length-1])+1).toString()
+    console.log("Container id :",event.container.id)
+    taskObj['priority']=(Number(event.container.id[event.container.id.length-1])%3+1).toString()
     taskObj['taskid']=taskObj['id']
     console.log('taskobj',taskObj)
     // delete taskObj['id']

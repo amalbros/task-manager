@@ -7,7 +7,6 @@
 
   }
 
-
   input[type=text] {
     padding: 10px;
     font-size: 17px;
@@ -16,14 +15,7 @@
     width: 80%;
     background: #f1f1f1;
   }
-  input[type=text]:active{
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid #4527A0 ;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
-  }
+ 
 
  
   

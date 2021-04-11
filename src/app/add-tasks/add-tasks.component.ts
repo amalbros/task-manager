@@ -56,6 +56,16 @@ listUsers(){
 }
 // convenience getter for easy access to form fields
 get f() { return this.taskForm.controls; }
+clearForm() {
+
+  this.taskForm.reset({
+    task: '',
+    associatedWith: '',
+    priority: '',
+    dueDate: '',
+    dueTime: ''
+       });
+  }
 onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
@@ -107,7 +117,11 @@ for ( var key in taskObj ) {
         taskObj['created_on']=date_string
         this.createdTask.emit(taskObj)
         console.log("Create Task Response:",data)
+        // this.taskForm.reset();
+        this.clearForm()
         this.showModal = false;
+        this.submitStatus=false;
+        this.submitted=false;
         
       })
       console.log("Form Data:",taskData)
