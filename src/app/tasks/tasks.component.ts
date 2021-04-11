@@ -15,6 +15,7 @@ users;
 useridToImg={};
 date = new Date();  
 dateString;
+dateCreatedString;
 priorities=[['Low',1],['Medium',2],['High',3],['All',4]]
 isDesc: boolean = false;
 priorityFilterForm=new FormGroup({
@@ -23,14 +24,14 @@ priorityFilterForm=new FormGroup({
   column: string = 'Priority';
   selectedPriority;
   constructor(private tasksService:TasksService) { 
-this.dateString=this.date.getFullYear()+'-'
-if (Number(this.date.getMonth)<10){
-this.dateString+= '0'+this.date.getMonth()+"-"
-}
-else{
-  this.dateString+= this.date.getMonth()+"-"
-}
- this.dateString+=this.date.getDate()
+// this.dateString=this.date.getFullYear()+'-'
+// if (Number(this.date.getMonth)<10){
+// this.dateString+= '0'+this.date.getMonth()+"-"
+// }
+// else{
+//   this.dateString+= this.date.getMonth()+"-"
+// }
+//  this.dateString+=this.date.getDate()
   }
 
   ngOnInit() {
@@ -56,6 +57,12 @@ else{
     }
     
   }
+  clear(){
+    this.selectedPriority=['All',4]
+    this.filteredTasks=this.tasks
+    this.dateString=''
+    this.dateCreatedString=''
+  }
   editEvent(event){
     console.log("Event:",event)
     this.filteredTasks[event.taskIndex]=event.task
@@ -79,11 +86,18 @@ else{
       }
       
     }
-    if (property=='createdDate'){
+
+    if (property=='createdDate' && this.dateString==''){
       this.filteredTasks=this.tasks.filter(task=>{
-        return task.created_on.slice(0,10)===this.dateString
+        return task.created_on.slice(0,10)===this.dateCreatedString
       })
     }
+    if (property=='createdDate' && this.dateString!=''){
+      this.filteredTasks=this.filteredTasks.filter(task=>{
+        return task.created_on.slice(0,10)===this.dateCreatedString
+      })
+    }
+
   }
   modelChange(){
     console.log(this.dateString)

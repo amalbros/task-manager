@@ -12,25 +12,29 @@
        </div>
        </div>
     <div class="row" style="margin-top:10%">
-      <div class="col-md-2"></div>
-      <div class="col-md-2">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-2">
         Priority:
         <!-- <form [formGroup]="priorityFilterForm" (ngModelChange)="filterBy('Priority')" > -->
         <select [(ngModel)]="selectedPriority" (ngModelChange)="filterBy('priority')">
           <option *ngFor="let priority of priorities" [value]='priority'>{{priority[0]}}</option>
         </select>
         </div>
-        <div class="col-md-3">
-        Due :
-        <!-- {{dateString}} -->
-       <input type="date" [(ngModel)]="dateString" (ngModelChange)="filterBy('dueDate')">
+        <div class="col-sm-3">
+          Created :
+          <input type="date" [(ngModel)]="dateCreatedString" (ngModelChange)="filterBy('createdDate')">
+  
       </div>
         
-        <div class="col-md-3">
-          Created :
-        <input type="date" [(ngModel)]="dateString" (ngModelChange)="filterBy('createdDate')">
+        <div class="col-sm-3">
+          Due :
+          <!-- {{dateString}} -->
+         <input type="date" [(ngModel)]="dateString" (ngModelChange)="filterBy('dueDate')">
       </div>
-      <div class="col-md-2">
+
+      <div class="col-sm-2">
+        <button   style="float:left;margin-right:10px;" (click)="clear()">Clear </button>
+
         <app-add-tasks (createdTask)="submit($event)"></app-add-tasks>
       </div>
       
