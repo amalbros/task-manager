@@ -1,2 +1,6 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import '../node_modules/font-awesome/css/font-awesome.css';
+.active {
+    background-color: #311B92;
+    color: white;
+  }
