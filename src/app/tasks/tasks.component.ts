@@ -14,8 +14,8 @@ searchText="";
 users;
 useridToImg={};
 date = new Date();  
-dateString;
-dateCreatedString;
+dueDateString;
+createdDateString;
 priorities=[['Low',1],['Medium',2],['High',3],['All',4]]
 isDesc: boolean = false;
 priorityFilterForm=new FormGroup({
@@ -24,14 +24,7 @@ priorityFilterForm=new FormGroup({
   column: string = 'Priority';
   selectedPriority;
   constructor(private tasksService:TasksService) { 
-// this.dateString=this.date.getFullYear()+'-'
-// if (Number(this.date.getMonth)<10){
-// this.dateString+= '0'+this.date.getMonth()+"-"
-// }
-// else{
-//   this.dateString+= this.date.getMonth()+"-"
-// }
-//  this.dateString+=this.date.getDate()
+
   }
 
   ngOnInit() {
@@ -53,15 +46,15 @@ priorityFilterForm=new FormGroup({
      this.filteredTasks=this.tasks;
     }
     else{
-      this.filteredTasks=this.tasks.filter(task=> task.message.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1)    
+      this.filteredTasks=this.filteredTasks.filter(task=> task.message.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1)    
     }
     
   }
   clear(){
     this.selectedPriority=['All',4]
     this.filteredTasks=this.tasks
-    this.dateString=''
-    this.dateCreatedString=''
+    this.dueDateString=''
+    this.createdDateString=''
   }
   editEvent(event){
     console.log("Event:",event)
@@ -73,7 +66,7 @@ priorityFilterForm=new FormGroup({
       this.filteredTasks=this.tasks.filter(task=>{
 
        
-        return task.due_date.slice(0,10)===this.dateString
+        return task.due_date.slice(0,10)===this.dueDateString
       })
     }
     if (property=='priority'){
@@ -87,21 +80,19 @@ priorityFilterForm=new FormGroup({
       
     }
 
-    if (property=='createdDate' && this.dateString==''){
+    if (property=='createdDate' && this.dueDateString==''){
       this.filteredTasks=this.tasks.filter(task=>{
-        return task.created_on.slice(0,10)===this.dateCreatedString
+        return task.created_on.slice(0,10)===this.createdDateString
       })
     }
-    if (property=='createdDate' && this.dateString!=''){
+    if (property=='createdDate' && this.dueDateString!=''){
       this.filteredTasks=this.filteredTasks.filter(task=>{
-        return task.created_on.slice(0,10)===this.dateCreatedString
+        return task.created_on.slice(0,10)===this.createdDateString
       })
     }
 
   }
-  modelChange(){
-    console.log(this.dateString)
-  }
+ 
   listTasks(){
     this.tasksService.listTasks().subscribe((data:any)=>{
       console.log("Data:",data)

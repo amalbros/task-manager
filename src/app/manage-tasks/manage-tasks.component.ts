@@ -58,23 +58,20 @@ colors={'Low':"green",'Medium':'yellow','High':'red'}
     taskObj['priority']=(Number(event.container.id[event.container.id.length-1])+1).toString()
     taskObj['taskid']=taskObj['id']
     console.log('taskobj',taskObj)
-    delete taskObj['id']
+    // delete taskObj['id']
     console.log('taskobj',taskObj)
-    let form_data = new FormData();
+    let taskData = new FormData();
 
 for ( var key in taskObj ) {
 
-    form_data.append(key, taskObj[key]);
-    // console.log("Key:",key)
-    // console.log("value:",taskObj[key])
-    // console.log("Form Data:",form_data)
+    taskData.append(key, taskObj[key]);
+  
 }
-    this.tasksService.updateTask(form_data).subscribe((data:any)=>{
+    this.tasksService.updateTask(taskData).subscribe((data:any)=>{
       console.log(data)
       
     })
-    // console.log(event.container.data[event.currentIndex])
-    // console.log(event.container.id[event.container.id.length-1])
+    
   }
 
 }

@@ -22,14 +22,14 @@
         </div>
         <div class="col-sm-3">
           Created :
-          <input type="date" [(ngModel)]="dateCreatedString" (ngModelChange)="filterBy('createdDate')">
+          <input type="date" [(ngModel)]="createdDateString" (ngModelChange)="filterBy('createdDate')">
   
       </div>
         
         <div class="col-sm-3">
           Due :
           <!-- {{dateString}} -->
-         <input type="date" [(ngModel)]="dateString" (ngModelChange)="filterBy('dueDate')">
+         <input type="date" [(ngModel)]="dueDateString" (ngModelChange)="filterBy('dueDate')">
       </div>
 
       <div class="col-sm-2">

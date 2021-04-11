@@ -36,6 +36,7 @@ useridToName={}
       dueDate:this.task.due_date.split(" ",2)[0],
       dueTime:this.task.due_date.split(" ",2)[1]
     });
+    this.taskForm.get('taskid').disable()
     this.taskForm.get('priority').setValue(this.task.priority);
     this.taskForm.get('associatedWith').setValue(this.users[(Number(this.task.assigned_to)-1)])
     console.log(this.taskForm)
@@ -85,14 +86,14 @@ onSubmit() {
     if (taskObj['due_date']!=this.task.due_date){
       taskObj['due_date']=taskObj['due_date']+':00'
     }
-    var form_data = new FormData();
+    var taskData = new FormData();
 
 for ( var key in taskObj ) {
 
-    form_data.append(key, taskObj[key]);
+    taskData.append(key, taskObj[key]);
     console.log("Key:",key)
     console.log("value:",taskObj[key])
-    console.log("Form Data:",form_data)
+    console.log("Form Data:",taskData)
 }
 
     console.log('Task Object:',taskObj)
@@ -104,7 +105,7 @@ for ( var key in taskObj ) {
       
       this.submitStatus=true;
       setTimeout(function(){},10000)
-      this.TasksService.updateTask(form_data).subscribe((data:any)=>{
+      this.TasksService.updateTask(taskData).subscribe((data:any)=>{
         taskObj['created_on']=this.task.created_on
         taskObj['assigned_name']=this.useridToName[taskObj['assigned_to']]
         taskObj['id']=taskObj['taskid']
@@ -112,7 +113,7 @@ for ( var key in taskObj ) {
         this.submitStatus=false;
         this.showModal = false;
       })
-      console.log("Form Data:",form_data)
+      console.log("Form Data:",taskData)
      
     } 
   

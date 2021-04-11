@@ -65,14 +65,14 @@ onSubmit() {
       "priority":this.taskForm.controls.priority.value,
       "assigned_to":this.taskForm.controls.associatedWith.value.id
     }
-    var form_data = new FormData();
+    var taskData = new FormData();
 
 for ( var key in taskObj ) {
 
-    form_data.append(key, taskObj[key]);
+    taskData.append(key, taskObj[key]);
     console.log("Key:",key)
     console.log("value:",taskObj[key])
-    console.log("Form Data:",form_data)
+    console.log("Form Data:",taskData)
 }
 // for(var pair of form_data.entries()){
 //   console.log(pair[0]+","+pair[1])
@@ -86,7 +86,7 @@ for ( var key in taskObj ) {
     {
       this.submitStatus=true;
         setTimeout(function(){  }, 10000);
-      this.addTasksService.createTask(form_data).subscribe((data:any)=>{
+      this.addTasksService.createTask(taskData).subscribe((data:any)=>{
         taskObj['id']=data.taskid
         taskObj['priority']=taskObj['priority'].toString()
         taskObj['assigned_name']=this.taskForm.controls.associatedWith.value.name
@@ -110,7 +110,7 @@ for ( var key in taskObj ) {
         this.showModal = false;
         
       })
-      console.log("Form Data:",form_data)
+      console.log("Form Data:",taskData)
      
       
     } 
