@@ -1,33 +1,41 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
-import { AddtasksService } from './addtasks.service';
-
+import { TasksService } from '../tasks/tasks.service';
 @Component({
-  selector: 'app-add-tasks',
-  templateUrl: './add-tasks.component.html',
-  styleUrls: ['./add-tasks.component.css']
+  selector: 'app-edit-tasks',
+  templateUrl: './edit-tasks.component.html',
+  styleUrls: ['./edit-tasks.component.css']
 })
-export class AddTasksComponent  {
-selectedDate;
-date;
-users;
-@Output() createdTask= new EventEmitter();
+export class EditTasksComponent implements OnInit {
 
-
-public disabled = false;
+  @Input() task;
+  public disabled = false;
 public showSpinners = true;
-priorities=[1,2,3]
+priorities=['1','2','3']
 
   title = 'angularpopup';
   showModal: boolean;
   taskForm: FormGroup;
   submitted = false;
+  users;
   
   show()
   {
     this.showModal = true; // Show-Hide Modal Check
-    
+    console.log('Task in Show:',this.task)
+    this.taskForm.patchValue({
+      taskid:this.task.id,
+      task:this.task.message,
+      associateWith:this.task.assigned_to,
+      priority:this.task.priority,
+      dueDate:this.task.due_date.split(" ",2)[0],
+      dueTime:this.task.due_date.split(" ",2)[1]
+    });
+    this.taskForm.get('priority').setValue(this.task.priority);
+    this.taskForm.get('associatedWith').setValue(this.users[(Number(this.task.assigned_to)-1)])
+    console.log(this.taskForm)
   }
   //Bootstrap Modal Close event
   hide()
@@ -36,6 +44,7 @@ priorities=[1,2,3]
   }
   ngOnInit() {
     this.taskForm = this.formBuilder.group({
+      taskid:['',[Validators.required]],
         task: ['', [Validators.required]],
         associatedWith: ['', [Validators.required, Validators.minLength(2)]],
         priority: ['', [Validators.required, Validators.minLength(2)]],
@@ -43,12 +52,14 @@ priorities=[1,2,3]
         dueTime: ['', [Validators.required,Validators.minLength(2)]]
     });
     this.listUsers()
+    console.log('Task:',this.task)
+   
 }
-constructor(private addTasksService:AddtasksService,private formBuilder: FormBuilder){
+constructor(private TasksService:TasksService,private formBuilder: FormBuilder){
 
 }
 listUsers(){
-  this.addTasksService.listUsers().subscribe((data:any)=>{
+  this.TasksService.listUsers().subscribe((data:any)=>{
     console.log("Users:",data)
     this.users=data.users
   })
@@ -57,7 +68,6 @@ listUsers(){
 get f() { return this.taskForm.controls; }
 onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
     var taskObj={
       "message":this.taskForm.controls.task.value,
       "due_date":this.taskForm.controls.dueDate.value+" "+this.taskForm.controls.dueTime.value+":00",
@@ -73,9 +83,6 @@ for ( var key in taskObj ) {
     console.log("value:",taskObj[key])
     console.log("Form Data:",form_data)
 }
-// for(var pair of form_data.entries()){
-//   console.log(pair[0]+","+pair[1])
-// }
 
     console.log('Task Object:',taskObj)
     if (this.taskForm.invalid) {
@@ -84,27 +91,8 @@ for ( var key in taskObj ) {
     if(this.submitted)
     {
       
-      this.addTasksService.createTask(form_data).subscribe((data:any)=>{
-        taskObj['id']=data.taskid
-        taskObj['priority']=taskObj['priority'].toString()
-        taskObj['assigned_name']=this.taskForm.controls.associatedWith.value.name
-        let date = new Date();  
-        let date_string=date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+" "+ date.getHours()+':'
-        if (Number(date.getMinutes())<10){
-          date_string+='0'+date.getMinutes()+':'
-        }
-        else{
-          date_string+=date.getMinutes()+':'
-        }
-        if (Number(date.getSeconds()<10)){
-          date_string+='0'+date.getSeconds()
-        }
-        else{
-          date_string+=date.getSeconds()
-        }
-        taskObj['created_on']=date_string
-        this.createdTask.emit(taskObj)
-        console.log("Create Task Response:",data)
+      this.TasksService.updateTask(form_data).subscribe((data:any)=>{
+       
       })
       console.log("Form Data:",form_data)
      

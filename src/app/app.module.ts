@@ -20,6 +20,7 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter
 import {MatNativeDateModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { taskPipe } from './task.pipe';
+import { EditTasksComponent } from './edit-tasks/edit-tasks.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { taskPipe } from './task.pipe';
     ManageTasksComponent,
     ContactsComponent,
     AddTasksComponent,
-    taskPipe
+    taskPipe,
+    EditTasksComponent
   ],
   imports: [
     NgxMatNativeDateModule,

@@ -1,29 +1,36 @@
 
- 
-<div class="container" style="margin-left:30%;">
-   
-    <button type="submit" style="margin-left:30%;background: #4527A0;border:1px solid #4527A0;border-radius:2px;color:white;padding:10px 20px 10px 20px"  (click) = "show()">Create Task</button>
 
-     </div> 
+   <a (click)="show()"> <i class="fa fa-edit" ></i></a> 
+
  <div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Create Task</h4>
+        <h4 class="modal-title" id="myModalLabel">Update Task</h4>
 
       </div>
       <div class="modal-body">
                 <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
                       <div class="row">
+
                          <div class="col-sm-6">
                             <div class="form-group">
-                                  <label>Task</label>
-                                  <input type="text" formControlName="task" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.task.errors }" />
-                                  <div *ngIf="submitted && f.task.errors" class="invalid-feedback">
-                                        <div *ngIf="f.task.errors.required">Task is required</div>
+                                  <label>Task ID</label>
+                                  <input type="text" formControlName="taskid" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.taskid.errors }" />
+                                  <div *ngIf="submitted && f.taskid.errors" class="invalid-feedback">
+                                        <div *ngIf="f.taskid.errors.required">Task ID is required</div>
                                   </div>
                                </div>
                          </div> 
+                         <div class="col-sm-6">
+                           <div class="form-group">
+                                 <label>Task </label>
+                                 <input type="text" formControlName="task" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.task.errors }" />
+                                 <div *ngIf="submitted && f.task.errors" class="invalid-feedback">
+                                       <div *ngIf="f.task.errors.required">Task is required</div>
+                                 </div>
+                              </div>
+                        </div> 
                          <div class="col-sm-6">
                             <div class="form-group">
                                <label>Associated With</label>
@@ -78,7 +85,7 @@
                            </div>
                         </div>
              </div>
-             
+
              <button type="submit" style="background: #4527A0;border:1px solid #4527A0;border-radius:2px;color:white;padding:10px 20px 10px 20px">Create</button>
             </form>
      
@@ -91,43 +98,3 @@
     </div>
   </div>
   </div>
-
-
-
-  <!-- <div class="example-form">
-
-   <h3 class="heading"> Add Task</h3>
-
- <form [formGroup] = "addTaskForm">
- <mat-form-field class="example-full-width">
-   <mat-label>Title</mat-label>
-   <input matInput formControlName = "title">
- </mat-form-field>
-
- <mat-form-field class="example-full-width">
-   <mat-label>Description</mat-label>
-   <textarea rows="3" matInput formControlName  = "description"></textarea>
- </mat-form-field>
-
-
-
-
-
- <mat-form-field class="example-full-width" appearance="fill">
-   <mat-label>Task Date</mat-label>
-   <input matInput [matDatepicker]="picker" formControlName = "date">
-   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-   <mat-datepicker #picker></mat-datepicker>
- </mat-form-field>
-
- <div class="btn">
-   <button mat-raised-button mat-dialog-close color="primary"> Cancel </button>
-   <button  mat-raised-button color="primary">
-     Save
-   </button>
- </div>
-
-</form>
-
-</div>
- -->

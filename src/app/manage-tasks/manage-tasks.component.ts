@@ -1,28 +1,50 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {TasksService} from '../tasks/tasks.service';
+import { createAotUrlResolver } from '@angular/compiler';
 @Component({
   selector: 'app-manage-tasks',
   templateUrl: './manage-tasks.component.html',
   styleUrls: ['./manage-tasks.component.css']
 })
-export class ManageTasksComponent  {
+export class ManageTasksComponent implements OnInit {
+ low=[]
+medium=[]
+high=[]
+tasks;
+lists=[];
+users;
+useridToImg={}
+colors={'Low':"green",'Medium':'yellow','High':'red'}
+  constructor(private tasksService:TasksService){
 
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
-
-  done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
-
+  }
+  ngOnInit(): void {
+    this.tasksService.listTasks().subscribe((data:any)=>{
+      this.tasks=data.tasks
+      console.log(this.tasks)
+      console.log(data)
+      this.low=this.tasks.filter(task=>task.priority=='1')
+      this.medium=this.tasks.filter(task=>task.priority=='2')
+      this.high=this.tasks.filter(task=>task.priority=='3')
+      this.lists.push(['Low',this.low])
+      this.lists.push(['Medium',this.medium])
+      this.lists.push(['High',this.high])
+      console.log("Lists:",this.lists)
+    })
+    this.tasksService.listUsers().subscribe((data:any)=>{
+      this.users=data.users
+      for (let user of this.users){
+        this.useridToImg[user.id.toString()]=user.picture
+      
+      }
+      console.log("User id to Image:",this.useridToImg)
+      console.log(this.users)
+    })
+  }
   drop(event: CdkDragDrop<string[]>) {
+    
+    
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -31,6 +53,28 @@ export class ManageTasksComponent  {
                         event.previousIndex,
                         event.currentIndex);
     }
+    let taskObj:any;
+    taskObj=event.container.data[event.currentIndex]
+    taskObj['priority']=(Number(event.container.id[event.container.id.length-1])+1).toString()
+    taskObj['taskid']=taskObj['id']
+    console.log('taskobj',taskObj)
+    delete taskObj['id']
+    console.log('taskobj',taskObj)
+    let form_data = new FormData();
+
+for ( var key in taskObj ) {
+
+    form_data.append(key, taskObj[key]);
+    // console.log("Key:",key)
+    // console.log("value:",taskObj[key])
+    // console.log("Form Data:",form_data)
+}
+    this.tasksService.updateTask(form_data).subscribe((data:any)=>{
+      console.log(data)
+      
+    })
+    // console.log(event.container.data[event.currentIndex])
+    // console.log(event.container.id[event.container.id.length-1])
   }
 
 }
