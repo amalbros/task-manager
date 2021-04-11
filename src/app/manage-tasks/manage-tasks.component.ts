@@ -2,6 +2,8 @@ import { Component ,OnInit} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {TasksService} from '../tasks/tasks.service';
 import { createAotUrlResolver } from '@angular/compiler';
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-manage-tasks',
   templateUrl: './manage-tasks.component.html',
@@ -16,10 +18,11 @@ lists=[];
 users;
 useridToImg={}
 colors={'Low':"green",'Medium':'yellow','High':'red'}
-  constructor(private tasksService:TasksService){
+  constructor(private tasksService:TasksService,private spinner:NgxSpinnerService){
 
   }
   ngOnInit(): void {
+    this.spinner.show()
     this.tasksService.listTasks().subscribe((data:any)=>{
       this.tasks=data.tasks
       console.log(this.tasks)
@@ -40,6 +43,7 @@ colors={'Low':"green",'Medium':'yellow','High':'red'}
       }
       console.log("User id to Image:",this.useridToImg)
       console.log(this.users)
+      this.spinner.hide()
     })
   }
   drop(event: CdkDragDrop<string[]>) {

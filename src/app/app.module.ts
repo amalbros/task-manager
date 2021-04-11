@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +12,8 @@ import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditTasksComponent } from './edit-tasks/edit-tasks.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +26,7 @@ import { EditTasksComponent } from './edit-tasks/edit-tasks.component';
   imports: [
     BrowserModule,
     FormsModule,
+    NgxSpinnerModule,
     BrowserAnimationsModule,
     HttpClientModule,
     DragDropModule,
@@ -31,6 +34,7 @@ import { EditTasksComponent } from './edit-tasks/edit-tasks.component';
     AppRoutingModule,
     AngularFontAwesomeModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [ ],
   bootstrap: [AppComponent]
 })

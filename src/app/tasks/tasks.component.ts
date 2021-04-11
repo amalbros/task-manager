@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TasksService } from './tasks.service';
-
+import { NgxSpinnerService } from "ngx-spinner";
+import { ThrowStmt } from '@angular/compiler';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -23,11 +24,14 @@ priorityFilterForm=new FormGroup({
 });
   column: string = 'Priority';
   selectedPriority;
-  constructor(private tasksService:TasksService) { 
+  constructor(private tasksService:TasksService,private spinner: NgxSpinnerService) { 
 
   }
 
   ngOnInit() {
+    this.spinner.show();
+
+  
     this.listTasks()
     this.tasksService.listUsers().subscribe((data:any)=>{
       this.users=data.users
@@ -37,6 +41,7 @@ priorityFilterForm=new FormGroup({
       }
       console.log("User id to Image:",this.useridToImg)
       console.log(this.users)
+      this.spinner.hide()
     })
   }
   search(){
