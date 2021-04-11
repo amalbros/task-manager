@@ -1,7 +1,11 @@
 * {
     box-sizing: border-box;
   }
-  
+  a:hover{
+    background-color: rgb(114, 114, 146);
+
+  }
+
   /* Style the search field */
   form.example input[type=text] {
     padding: 10px;

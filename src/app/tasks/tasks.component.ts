@@ -14,7 +14,7 @@ searchText="";
 users;
 useridToImg={};
 date = new Date();  
-dateString=this.date.getFullYear()+'-' +'0'+this.date.getMonth()+"-"+this.date.getDate()
+dateString;
 priorities=[['Low',1],['Medium',2],['High',3],['All',4]]
 isDesc: boolean = false;
 priorityFilterForm=new FormGroup({
@@ -22,7 +22,16 @@ priorityFilterForm=new FormGroup({
 });
   column: string = 'Priority';
   selectedPriority;
-  constructor(private tasksService:TasksService) { }
+  constructor(private tasksService:TasksService) { 
+this.dateString=this.date.getFullYear()+'-'
+if (Number(this.date.getMonth)<10){
+this.dateString+= '0'+this.date.getMonth()+"-"
+}
+else{
+  this.dateString+= this.date.getMonth()+"-"
+}
+ this.dateString+=this.date.getDate()
+  }
 
   ngOnInit() {
     this.listTasks()
@@ -35,6 +44,21 @@ priorityFilterForm=new FormGroup({
       console.log("User id to Image:",this.useridToImg)
       console.log(this.users)
     })
+  }
+  search(){
+    console.log('hello')
+    if (this.searchText == null) {
+
+     this.filteredTasks=this.tasks;
+    }
+    else{
+      this.filteredTasks=this.tasks.filter(task=> task.message.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1)    
+    }
+    
+  }
+  editEvent(event){
+    console.log("Event:",event)
+    this.filteredTasks[event.taskIndex]=event.task
   }
   filterBy(property){
     console.log("Property:",property)

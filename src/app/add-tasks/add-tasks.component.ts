@@ -23,6 +23,7 @@ priorities=[1,2,3]
   showModal: boolean;
   taskForm: FormGroup;
   submitted = false;
+  submitStatus=false;
   
   show()
   {
@@ -37,10 +38,10 @@ priorities=[1,2,3]
   ngOnInit() {
     this.taskForm = this.formBuilder.group({
         task: ['', [Validators.required]],
-        associatedWith: ['', [Validators.required, Validators.minLength(2)]],
-        priority: ['', [Validators.required, Validators.minLength(2)]],
-        dueDate: ['', [Validators.required,Validators.minLength(2)]],
-        dueTime: ['', [Validators.required,Validators.minLength(2)]]
+        associatedWith: ['', [Validators.required]],
+        priority: ['', [Validators.required]],
+        dueDate: ['', [Validators.required]],
+        dueTime: ['', [Validators.required]]
     });
     this.listUsers()
 }
@@ -83,7 +84,8 @@ for ( var key in taskObj ) {
     }
     if(this.submitted)
     {
-      
+      this.submitStatus=true;
+        setTimeout(function(){  }, 10000);
       this.addTasksService.createTask(form_data).subscribe((data:any)=>{
         taskObj['id']=data.taskid
         taskObj['priority']=taskObj['priority'].toString()
@@ -105,10 +107,12 @@ for ( var key in taskObj ) {
         taskObj['created_on']=date_string
         this.createdTask.emit(taskObj)
         console.log("Create Task Response:",data)
+        this.showModal = false;
+        
       })
       console.log("Form Data:",form_data)
      
-      this.showModal = false;
+      
     } 
   
 }

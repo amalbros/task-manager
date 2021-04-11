@@ -11,10 +11,13 @@ import { TasksService } from '../tasks/tasks.service';
 export class EditTasksComponent implements OnInit {
 
   @Input() task;
+  @Input() taskIndex;
+  @Output() editTask=new EventEmitter();
   public disabled = false;
 public showSpinners = true;
+submitStatus=false
 priorities=['1','2','3']
-
+useridToName={}
   title = 'angularpopup';
   showModal: boolean;
   taskForm: FormGroup;
@@ -46,10 +49,10 @@ priorities=['1','2','3']
     this.taskForm = this.formBuilder.group({
       taskid:['',[Validators.required]],
         task: ['', [Validators.required]],
-        associatedWith: ['', [Validators.required, Validators.minLength(2)]],
-        priority: ['', [Validators.required, Validators.minLength(2)]],
-        dueDate: ['', [Validators.required,Validators.minLength(2)]],
-        dueTime: ['', [Validators.required,Validators.minLength(2)]]
+        associatedWith: ['', [Validators.required]],
+        priority: ['', [Validators.required ]],
+        dueDate: ['', [Validators.required]],
+        dueTime: ['', [Validators.required]]
     });
     this.listUsers()
     console.log('Task:',this.task)
@@ -62,6 +65,10 @@ listUsers(){
   this.TasksService.listUsers().subscribe((data:any)=>{
     console.log("Users:",data)
     this.users=data.users
+    for (let user of this.users){
+      this.useridToName[user.id]=user.name
+    }
+  
   })
 }
 // convenience getter for easy access to form fields
@@ -69,10 +76,14 @@ get f() { return this.taskForm.controls; }
 onSubmit() {
     this.submitted = true;
     var taskObj={
+      "taskid":this.taskForm.controls.taskid.value,
       "message":this.taskForm.controls.task.value,
-      "due_date":this.taskForm.controls.dueDate.value+" "+this.taskForm.controls.dueTime.value+":00",
+      "due_date":this.taskForm.controls.dueDate.value+" "+this.taskForm.controls.dueTime.value,
       "priority":this.taskForm.controls.priority.value,
       "assigned_to":this.taskForm.controls.associatedWith.value.id
+    }
+    if (taskObj['due_date']!=this.task.due_date){
+      taskObj['due_date']=taskObj['due_date']+':00'
     }
     var form_data = new FormData();
 
@@ -91,12 +102,18 @@ for ( var key in taskObj ) {
     if(this.submitted)
     {
       
+      this.submitStatus=true;
+      setTimeout(function(){},10000)
       this.TasksService.updateTask(form_data).subscribe((data:any)=>{
-       
+        taskObj['created_on']=this.task.created_on
+        taskObj['assigned_name']=this.useridToName[taskObj['assigned_to']]
+        taskObj['id']=taskObj['taskid']
+        this.editTask.emit({'task':taskObj,'taskIndex':this.taskIndex})
+        this.submitStatus=false;
+        this.showModal = false;
       })
       console.log("Form Data:",form_data)
      
-      this.showModal = false;
     } 
   
 }
