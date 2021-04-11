@@ -31,7 +31,7 @@ priorityFilterForm=new FormGroup({
   ngOnInit() {
     this.spinner.show();
 
-  
+  this.selectedPriority=['All',4]
     this.listTasks()
     this.tasksService.listUsers().subscribe((data:any)=>{
       this.users=data.users

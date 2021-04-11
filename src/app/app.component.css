@@ -10,22 +10,22 @@
 }
 
 body {
-    background: #eee
+    background: #eee;
 }
 
-.wrapper {
+/* .wrapper {
     position: relative
-}
+} */
 
 .sidebar {
     position: fixed;
-    width: 250px;
+    width: 20%;
     height: 100%;
     background: #4527A0;
     padding: 10px 0
 }
 
-.wrapper .sidebar ul li {
+/* .wrapper .sidebar ul li {
     padding: 15px
 }
 
@@ -49,9 +49,9 @@ body {
 .wrapper .sidebar ul li a:hover {
     color: #fff;
     text-decoration: none
-}
+} */
 
-.myproject {
+/* .myproject {
     margin-top: 25px;
     color: #ffffffa8;
     font-size: 14px;
@@ -110,4 +110,69 @@ body {
     display: block;
     padding-left: 85px;
     color: #fff
-}
+} */
+
+
+/* responsive test */
+/* The side navigation menu */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    background-color: #4527A0;
+    position: fixed;
+    height: 100%;
+    /* overflow: auto; */
+  }
+  
+  /* Sidebar links */
+  .sidebar ul li a {
+    display: block;
+     color: #bdb8d7;
+    padding: 16px;
+    text-decoration: none;
+  }
+  
+  /* Active/current link */
+  .sidebar ul li a.active {
+    background-color: #311B92;
+    color: white;
+  }
+  
+  /* Links on mouse-over */
+  .sidebar ul li a:hover:not(.active) {
+    background-color: #311B92;
+    color: white;
+  }
+  
+  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+  
+  /* On screens that are less than 700px wide, make the sidebar into a topbar */
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      background-color: #311B92;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+  @media screen and (max-width: 400px) {
+    .sidebar {
+      
+        background-color: #311B92;
+       
+      }
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+  }
