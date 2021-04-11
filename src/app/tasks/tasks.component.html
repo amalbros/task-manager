@@ -12,7 +12,7 @@
        <!-- <div class="col-md-2">
        </div> -->
   </div>
-    <div class="row" style="margin-top:6%">
+    <div class="row" style="margin-top:6%;" >
       <div class="col-sm-2 col-sm-hide"></div>
       <div class="col-sm-2">
         Priority:
@@ -23,7 +23,7 @@
         </div>
         <div class="col-sm-3">
           Created :
-          <input type="date" [(ngModel)]="createdDateString" (ngModelChange)="filterBy('createdDate')">
+          <input type="date" maxwidth="20px" [(ngModel)]="createdDateString" (ngModelChange)="filterBy('createdDate')">
   
       </div>
         
@@ -32,9 +32,8 @@
           <!-- {{dateString}} -->
          <input type="date" [(ngModel)]="dueDateString" (ngModelChange)="filterBy('dueDate')">
       </div>
-
-      <div class="col-sm-2">
-        <button   style="float:left;margin-right:10px;" (click)="clear()">Clear </button>
+      <div class="col-sm-2" >
+        <button   style="float:left;margin-right:5px" (click)="clear()">Clear </button>
 
         <app-add-tasks (createdTask)="submit($event)"></app-add-tasks>
       </div>

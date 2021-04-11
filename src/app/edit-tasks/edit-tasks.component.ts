@@ -52,7 +52,7 @@ useridToName={}
         task: ['', [Validators.required]],
         associatedWith: ['', [Validators.required]],
         priority: ['', [Validators.required ]],
-        dueDate: ['', [Validators.required]],
+        dueDate: ['', [Validators.required,this.dateCheck]],
         dueTime: ['', [Validators.required]]
     });
     this.listUsers()
@@ -74,6 +74,33 @@ listUsers(){
 }
 // convenience getter for easy access to form fields
 get f() { return this.taskForm.controls; }
+dateCheck(control:FormControl){
+  let dueDate=control.value;
+  console.log('Validator:',dueDate)
+  let todaysDate=new Date()
+ let createdDate=todaysDate.getFullYear()+'-'+(Number(todaysDate.getMonth())+1).toString()+'-'+todaysDate.getDate()
+ let createdDateList=createdDate.split('-')
+ let dueDateList=dueDate.split('-')                                                                                                                            
+  let createdYear=Number(createdDateList[0]);
+  let dueYear=Number(dueDateList[0]);
+
+  let createdDay=Number(createdDateList[2]);
+  let dueDay=Number(dueDateList[2]);
+  let createdMonth=Number(createdDateList[1]);
+  let dueMonth=Number(dueDateList[1]);
+  if (createdYear > dueYear) {
+  
+   return {'dateCheck':true}
+} else if (createdMonth > dueMonth && createdYear >= dueYear) {
+
+  return {'dateCheck':true}
+} else if (createdDay > dueDay && createdMonth >= dueMonth && createdYear >= dueYear) {
+
+  return {'dateCheck':true}
+}
+
+return null
+}
 onSubmit() {
     this.submitted = true;
     var taskObj={

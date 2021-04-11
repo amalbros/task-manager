@@ -19,8 +19,12 @@
                                   <label>Task</label>
                                   <input type="text" formControlName="task" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.task.errors }" />
                                   <div *ngIf="submitted && f.task.errors" class="invalid-feedback">
+                                     
                                         <div *ngIf="f.task.errors.required">Task is required</div>
+                                        
+
                                   </div>
+
                                </div>
                          </div> 
                          <div class="col-sm-6">
@@ -45,7 +49,7 @@
    
                                <div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
                                   <div *ngIf="f.dueDate.errors.required">Due Date is required</div>
-            
+                                  <div *ngIf="f.dueDate.errors.dateCheck">Due Date is before Created Date</div>
                                </div>
                             </div>
                          </div>

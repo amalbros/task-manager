@@ -12,6 +12,7 @@ export class AddTasksComponent  {
 selectedDate;
 date;
 users;
+dateCheckStatus=false;
 @Output() createdTask= new EventEmitter();
 
 
@@ -40,7 +41,7 @@ priorities=[1,2,3]
         task: ['', [Validators.required]],
         associatedWith: ['', [Validators.required]],
         priority: ['', [Validators.required]],
-        dueDate: ['', [Validators.required]],
+        dueDate: ['', [Validators.required,this.dateCheck]],
         dueTime: ['', [Validators.required]]
     });
     this.listUsers()
@@ -66,8 +67,38 @@ clearForm() {
     dueTime: ''
        });
   }
+  dateCheck(control:FormControl){
+    let dueDate=control.value;
+    console.log('Validator:',dueDate)
+    let todaysDate=new Date()
+   let createdDate=todaysDate.getFullYear()+'-'+(Number(todaysDate.getMonth())+1).toString()+'-'+todaysDate.getDate()
+   let createdDateList=createdDate.split('-')
+   let dueDateList=dueDate.split('-')                                                                                                                            
+    let createdYear=Number(createdDateList[0]);
+    let dueYear=Number(dueDateList[0]);
+ 
+    let createdDay=Number(createdDateList[2]);
+    let dueDay=Number(dueDateList[2]);
+    let createdMonth=Number(createdDateList[1]);
+    let dueMonth=Number(dueDateList[1]);
+    if (createdYear > dueYear) {
+    
+     return {'dateCheck':true}
+  } else if (createdMonth > dueMonth && createdYear >= dueYear) {
+
+    return {'dateCheck':true}
+  } else if (createdDay > dueDay && createdMonth >= dueMonth && createdYear >= dueYear) {
+
+    return {'dateCheck':true}
+  }
+ 
+  return null
+  }
 onSubmit() {
     this.submitted = true;
+    console.log('Date:')
+   console.log(this.taskForm.controls.dueDate.value)
+this.dateCheck(this.taskForm.controls.dueDate.value)
     // stop here if form is invalid
     var taskObj={
       "message":this.taskForm.controls.task.value,
