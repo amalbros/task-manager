@@ -16,9 +16,17 @@
     background: #f1f1f1;
     outline: none;
   }
-
+  @media screen and (max-width: 800px) {
+    .col-sm-hide {
+      display: none;
+    }
  
+  }
 
- 
+  @media screen and (min-width: 800px) {
+    .table {
+      margin-top:3%;margin-left:20%;width:78%;
+    }
+  }
   
   
