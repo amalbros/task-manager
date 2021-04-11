@@ -1,5 +1,4 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
-@import "~ngx-datetime-picker/ngx-datetime-picker.css";
 @import '~open-iconic/font/css/open-iconic-bootstrap.css';
 .mat-datepicker-content {
     /* display: block; */

@@ -51,7 +51,7 @@ priorityFilterForm=new FormGroup({
      this.filteredTasks=this.tasks;
     }
     else{
-      this.filteredTasks=this.filteredTasks.filter(task=> task.message.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1)    
+      this.filteredTasks=this.tasks.filter(task=> task.message.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1)    
     }
     
   }
