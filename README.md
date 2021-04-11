@@ -1,14 +1,15 @@
 # TaskManager
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
+
 The Task manager have the following functionalities:
-Create task
-Assign a task to a user
-Update Task 
-Delete task
-View task based on the date and priority (High medium-low)
-Being able to drag and drop a task from one priority to another
-Real-Time Search bar
+Create task.
+Assign a task to a user.
+Update Task. 
+Delete task.
+View task based on the date and priority (High medium-low).
+Being able to drag and drop a task from one priority to another.
+Real-Time Search bar.
 
 Demo:[here](https://taskmanagerplatform.netlify.app)
 
