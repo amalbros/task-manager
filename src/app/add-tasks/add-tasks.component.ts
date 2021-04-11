@@ -25,6 +25,7 @@ priorities=[1,2,3]
   taskForm: FormGroup;
   submitted = false;
   submitStatus=false;
+  timeCheckStatus=false;
   
   show()
   {
@@ -67,6 +68,39 @@ clearForm() {
     dueTime: ''
        });
   }
+  timeCheck(){
+    let dueTime=this.taskForm.controls.dueTime.value;
+    let dueDate=this.taskForm.controls.dueDate.value.split('-');
+    dueDate=[Number(dueDate[0]),Number(dueDate[1]),Number(dueDate[2])]
+dueTime=dueTime.split(':')
+let dueMinutes=Number(dueTime[1])
+let dueHours=Number(dueTime[0])
+    let todaysDate=new Date()
+    let createdDate=[Number(todaysDate.getFullYear()),(Number(todaysDate.getMonth())+1),Number(todaysDate.getDate())]
+    let todaysMinutes=Number(todaysDate.getMinutes());
+    let todaysHours=Number(todaysDate.getHours());
+    console.log(createdDate)
+    console.log(dueDate)
+    console.log(dueTime)
+    console.log(todaysMinutes)
+    console.log(todaysHours)
+    if (dueDate[0]==createdDate[0] && dueDate[1]==createdDate[1] && dueDate[2]==createdDate[2]){
+      console.log('In if')
+      if (dueHours<todaysHours){
+        this.timeCheckStatus=true;
+      }
+      if (dueHours==todaysHours){
+        if (dueMinutes<=todaysMinutes){
+          this.timeCheckStatus=true
+        }
+      }
+    }
+    else{
+      this.timeCheckStatus=false;
+    }
+
+  }
+
   dateCheck(control:FormControl){
     let dueDate=control.value;
     console.log('Validator:',dueDate)
@@ -95,6 +129,7 @@ clearForm() {
   return null
   }
 onSubmit() {
+  this.timeCheckStatus=false;
     this.submitted = true;
     
     // stop here if form is invalid
@@ -120,6 +155,10 @@ for ( var key in taskObj ) {
     console.log('Task Object:',taskObj)
     if (this.taskForm.invalid) {
         return;
+    }
+    this.timeCheck()
+    if (this.timeCheckStatus){
+      return;
     }
     if(this.submitted)
     {
@@ -151,6 +190,7 @@ for ( var key in taskObj ) {
         this.showModal = false;
         this.submitStatus=false;
         this.submitted=false;
+        this.timeCheckStatus=false;
         
       })
       console.log("Form Data:",taskData)

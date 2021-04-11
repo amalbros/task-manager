@@ -49,7 +49,7 @@
    
                                <div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
                                   <div *ngIf="f.dueDate.errors.required">Due Date is required</div>
-                                  <div *ngIf="f.dueDate.errors.dateCheck">Due Date is before Created Date</div>
+                                  <div *ngIf="f.dueDate.errors.dateCheck && !f.dueDate.errors.required">Due Date is before Created Date</div>
                                </div>
                             </div>
                          </div>
@@ -57,12 +57,18 @@
                            <div class="form-group">
                               <label>Due Time</label>
                         <br>
-                            <input type="time"formControlName="dueTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dueTime.errors }"  >
+                            <input type="time"formControlName="dueTime" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dueTime.errors || timeCheckStatus }"  >
   
                               <div *ngIf="submitted && f.dueTime.errors" class="invalid-feedback">
                                  <div *ngIf="f.dueTime.errors.required">Due Time is required</div>
-           
+                                 
+
                               </div>
+                              <div *ngIf="timeCheckStatus && !f.dueTime.errors" style="
+                              width: 100%;
+                              margin-top: .25rem;
+                              font-size: 80%;
+                              color: #dc3545;" >Due Time is before Creation Time on Today</div>
                            </div>
                         </div>
                         <div class="col-sm-6">

@@ -156,11 +156,11 @@ for ( var key in taskObj ) {
     console.log("value:",taskObj[key])
     console.log("Form Data:",form_data)
 }
-
+this.filteredTasks.splice(i,1)
     this.tasksService.deleteTask(form_data).subscribe((data:any)=>{
       console.log("Data:",data)
       // this.tasks.splice(i,1)
-    this.filteredTasks.splice(i,1)
+    
       console.log('Tasks after deletion',this.filteredTasks)
     })
   }
