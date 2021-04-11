@@ -65,9 +65,7 @@ else{
     if (property=='dueDate'){
       this.filteredTasks=this.tasks.filter(task=>{
 
-        // console.log(task.due_date.slice(0,11))
-        // console.log(this.dateString)
-        // console.log(task.due_date.slice(0,10)===this.dateString)
+       
         return task.due_date.slice(0,10)===this.dateString
       })
     }
@@ -80,6 +78,11 @@ else{
         this.filteredTasks=this.tasks.filter(task=>task.priority==selectedPriority)
       }
       
+    }
+    if (property=='createdDate'){
+      this.filteredTasks=this.tasks.filter(task=>{
+        return task.created_on.slice(0,10)===this.dateString
+      })
     }
   }
   modelChange(){
